@@ -5,8 +5,7 @@ const mongoose = require('mongoose');
 const activityTypeSchema = new mongoose.Schema({
   type: {
     type: String,
-    enum: ['Hard', 'Easy', 'Creative', 'Detrimental'],
-    required: true
+    enum: ['Hard', 'Easy', 'Creative', 'Routine'],
   }
 });
 
@@ -18,15 +17,15 @@ const activityEntrySchema = new mongoose.Schema({
         activityName: {
           type: String,
           enum: ['Morning hygiene', 'Breakfast', 'Leave to work', 'Work from home', ''],
-          required: true
+         
         },
         activityTypes: [activityTypeSchema] // Embeds activity types schema as an array
       },
       afternoon: {
         activityName: {
           type: String,
-          enum: ['Lunchbreak', 'Finish workload', 'Returnhome', 'Go groceries', ''],
-          required: true
+          enum: ['Lunchbreak', 'Finish workload', 'Return home', 'Go groceries', ''],
+        
         },
         activityTypes: [activityTypeSchema] 
       },
@@ -34,7 +33,7 @@ const activityEntrySchema = new mongoose.Schema({
         activityName: {
           type: String,
           enum: ['Family Time', 'Go for walk', 'Exercise', 'Help the community', ''],
-          required: true
+        
         },
         activityTypes: [activityTypeSchema] 
       },
@@ -42,7 +41,7 @@ const activityEntrySchema = new mongoose.Schema({
         activityName: {
           type: String,
           enum: ['Prepare for the morning', 'Read a book', 'Go for clubbing', 'Meditate', ''],
-          required: true
+          
         },
         activityTypes: [activityTypeSchema] 
       }
