@@ -17,7 +17,7 @@ const activityEntrySchema = new mongoose.Schema({
       morning: {
         activityName: {
           type: String,
-          enum: ['Morning hygiene', 'Breakfast', 'Leave to work', 'Work from home', ''], // Predefined options + custom
+          enum: ['Morning hygiene', 'Breakfast', 'Leave to work', 'Work from home', ''],
           required: true
         },
         activityTypes: [activityTypeSchema] // Embeds activity types schema as an array
@@ -47,9 +47,9 @@ const activityEntrySchema = new mongoose.Schema({
         activityTypes: [activityTypeSchema] 
       }
     }
-  }, { timestamps: true });
+});
 
-  const ActivityEntry = mongoose.model('ActivityEntry', activityEntrySchema);
-  const ActivityType = mongoose.model('ActivityType', activityTypeSchema);
+const ActivityEntry = mongoose.model('ActivityEntry', activityEntrySchema);
+const ActivityType = mongoose.model('ActivityType', activityTypeSchema);
 
 module.exports = { ActivityEntry, ActivityType };

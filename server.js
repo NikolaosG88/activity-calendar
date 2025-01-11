@@ -1,4 +1,4 @@
-//server.js
+//activity-calendar/server.js
 
 const dotenv = require('dotenv');
 dotenv.config();
