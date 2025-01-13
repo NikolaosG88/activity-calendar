@@ -1,4 +1,4 @@
-//activity-calenndar/models/users.js
+//activity-calenndarback-end/models/users.js
 
 const mongoose = require('mongoose');
 

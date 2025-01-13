@@ -1,4 +1,4 @@
-//controllers/test-jwt.js
+//back-end activity-calendar/controllers/profiles.js
 
 const express = require('express');
 const router = express.Router();

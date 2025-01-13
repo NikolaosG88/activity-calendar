@@ -1,54 +1,44 @@
-//activity-calendar/models/activity.js
+//activity-calendar-back-end/models/activity.js
 
 const mongoose = require('mongoose');
 
 const activityTypeSchema = new mongoose.Schema({
   type: {
     type: String,
-    enum: ['Hard', 'Easy', 'Creative', 'Routine'],
-  }
-});
+    default: "",
+    trim: true
+  },
+  author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
+},
+{ timestamps: true }
+);
 
-const activityEntrySchema = new mongoose.Schema({
-    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-    date: { type: Date, required: true },
+const activityEntrySchema = new mongoose.Schema(
+  {
+    author: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     activities: {
       morning: {
-        activityName: {
-          type: String,
-          enum: ['Morning hygiene', 'Breakfast', 'Leave to work', 'Work from home', ''],
-         
-        },
-        activityTypes: [activityTypeSchema] // Embeds activity types schema as an array
+        activityName: { type: String, default: "No activity logged", trim: true },
+        activityTypes: { type: [activityTypeSchema], default: [] },
       },
       afternoon: {
-        activityName: {
-          type: String,
-          enum: ['Lunchbreak', 'Finish workload', 'Return home', 'Go groceries', ''],
-        
-        },
-        activityTypes: [activityTypeSchema] 
+        activityName: { type: String, default: "No activity logged", trim: true },
+        activityTypes: { type: [activityTypeSchema], default: [] },
       },
       evening: {
-        activityName: {
-          type: String,
-          enum: ['Family Time', 'Go for walk', 'Exercise', 'Help the community', ''],
-        
-        },
-        activityTypes: [activityTypeSchema] 
+        activityName: { type: String, default: "No activity logged", trim: true },
+        activityTypes: { type: [activityTypeSchema], default: [] },
       },
       night: {
-        activityName: {
-          type: String,
-          enum: ['Prepare for the morning', 'Read a book', 'Go for clubbing', 'Meditate', ''],
-          
-        },
-        activityTypes: [activityTypeSchema] 
-      }
-    }
-});
+        activityName: { type: String, default: "No activity logged", trim: true },
+        activityTypes: { type: [activityTypeSchema], default: [] },
+      },
+    },
+  },
+  { timestamps: true }
+);
 
-const ActivityEntry = mongoose.model('ActivityEntry', activityEntrySchema);
-const ActivityType = mongoose.model('ActivityType', activityTypeSchema);
 
-module.exports = { ActivityEntry, ActivityType };
+const Activity = mongoose.model('Activity', activityEntrySchema);
+
+module.exports = Activity;
