@@ -6,6 +6,7 @@ const activityTypeSchema = new mongoose.Schema({
   type: {
     type: String,
     default: "",
+    required: true,
     trim: true
   },
   author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
@@ -13,32 +14,31 @@ const activityTypeSchema = new mongoose.Schema({
 { timestamps: true }
 );
 
-const activityEntrySchema = new mongoose.Schema(
-  {
-    author: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-    activities: {
+const activitySchema = new mongoose.Schema(
+    {
       morning: {
-        activityName: { type: String, default: "No activity logged", trim: true },
-        activityTypes: { type: [activityTypeSchema], default: [] },
+        type: String,
+        required: true,
       },
       afternoon: {
-        activityName: { type: String, default: "No activity logged", trim: true },
-        activityTypes: { type: [activityTypeSchema], default: [] },
+        type: String,
+        required: true,
       },
       evening: {
-        activityName: { type: String, default: "No activity logged", trim: true },
-        activityTypes: { type: [activityTypeSchema], default: [] },
+        type: String,
+        required: true,
       },
       night: {
-        activityName: { type: String, default: "No activity logged", trim: true },
-        activityTypes: { type: [activityTypeSchema], default: [] },
+        type: String,
+        required: true,
       },
+      author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+      activityTypes: [activityTypeSchema],
     },
-  },
-  { timestamps: true }
+    { timestamps: true }
 );
 
 
-const Activity = mongoose.model('Activity', activityEntrySchema);
+const Activity = mongoose.model('Activity', activitySchema);
 
 module.exports = Activity;
