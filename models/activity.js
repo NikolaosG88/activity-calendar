@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 
 const activityTypeSchema = new mongoose.Schema({
-  type: {
+  activityType: {
     type: String,
     default: "",
     required: true,
@@ -17,23 +17,22 @@ const activityTypeSchema = new mongoose.Schema({
 const activitySchema = new mongoose.Schema(
     {
       morning: {
-        type: String,
-        required: true,
+        activityName: String,
+        activityType: activityTypeSchema,
       },
       afternoon: {
-        type: String,
-        required: true,
+        activityName: String,
+        activityType: activityTypeSchema,
       },
       evening: {
-        type: String,
-        required: true,
+        activityName: String,
+        activityType: activityTypeSchema,
       },
       night: {
-        type: String,
-        required: true,
+        activityName: String,
+        activityType: activityTypeSchema,
       },
       author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-      activityTypes: [activityTypeSchema],
     },
     { timestamps: true }
 );

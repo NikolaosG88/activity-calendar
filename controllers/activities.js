@@ -24,6 +24,24 @@ router.use(verifyToken);
 router.post('/', async (req, res) => {
     try {
       req.body.author = req.user._id;
+      console.log(req.body);
+      req.body.morning.activityType= {
+        activityType: req.body.morning.activityType,
+        author: req.user._id,
+      }
+      req.body.afternoon.activityType= {
+        activityType: req.body.afternoon.activityType,
+        author: req.user._id,
+      }
+      req.body.evening.activityType= {
+        activityType: req.body.evening.activityType,
+        author: req.user._id,
+      }
+      req.body.night.activityType= {
+        activityType: req.body.night.activityType,
+        author: req.user._id,
+      }
+      console.log(req.body);
       const activity = await Activity.create(req.body);
       activity._doc.author = req.user;
       res.status(201).json(activity);
@@ -34,21 +52,21 @@ router.post('/', async (req, res) => {
 });
 
 // POST new activity type (full URL: POST /activities/:activityId/types)
-router.post('/:activityId/types', async (req, res) => {
-    try {
-      req.body.author = req.user._id;
-      const activity = await Activity.findById(req.params.activityId);
-      activity.activityTypes.push(req.body);
-      await activity.save();
+// router.post('/:activityId/types', async (req, res) => {
+//     try {
+//       req.body.author = req.user._id;
+//       const activity = await Activity.findById(req.params.activityId);
+//       activity.activityTypes.push(req.body);
+//       await activity.save();
 
-      const newActivityType = activity.activityTypes[activity.activityTypes.length - 1];
-      newActivityType._doc.author = req.user;
+//       const newActivityType = activity.activityTypes[activity.activityTypes.length - 1];
+//       newActivityType._doc.author = req.user;
 
-      res.status(201).json(newActivityType);
-    } catch (error) {
-      res.status(500).json(error);
-    }
-});
+//       res.status(201).json(newActivityType);
+//     } catch (error) {
+//       res.status(500).json(error);
+//     }
+// });
 
 // GET single activity by ID (full URL: GET /activities/:activityId)
 router.get('/:activityId', async (req, res) => {
