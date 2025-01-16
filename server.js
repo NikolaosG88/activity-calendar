@@ -18,10 +18,7 @@ mongoose.connect(process.env.MONGODB_URI);
 mongoose.connection.on('connected', () => {
     console.log(`Connected to MongoDB ${mongoose.connection.name}.`);
 });
-app.use(cors({
-    origin: 'https://activity-program.netlify.app',
-    methods: ['GET', 'POST', 'PUT', 'DELETE']
-  }));
+app.use(cors());
   
 app.use(express.json());
 
