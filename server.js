@@ -11,13 +11,23 @@ const usersRouter = require('./controllers/users');
 const profilesRouter = require('./controllers/profiles');
 const activitiesRouter = require('./controllers/activities');
 
+const allowedOrigins = process.env.ALLOWED_ORIGINS.split(',')
+
 mongoose.connect(process.env.MONGODB_URI);
 
 mongoose.connection.on('connected', () => {
     console.log(`Connected to MongoDB ${mongoose.connection.name}.`);
 });
-app.use(cors({ origin: 'https://activity-program.netlify.app/' }));
+app.use(cors({
+    origin: 'https://activity-program.netlify.app',
+    methods: ['GET', 'POST', 'PUT', 'DELETE']
+  }));
+  
 app.use(express.json());
+
+app.get('/api', (req, res) => {
+    res.json({ message: 'Hello from the backend!' });
+  });
 
 // Routes go here
 app.use('/test-jwt', testJWTRouter);
